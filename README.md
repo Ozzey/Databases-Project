@@ -6,11 +6,15 @@ This is the repository of MIPT2025 Databases project.
 - It contains 19 different tables
 
 
+## Conceptual Model
+
+
+
 ## Logical Model
 
 ![image](https://user-images.githubusercontent.com/49760167/232552177-7e0d2ca6-3b92-479d-804b-5219eb089d72.png)
 
-## Description
+## Physical MOdel (Description)
 
 ### Table 1: bill
 | Column Name | Description | Data Type |
