@@ -10,7 +10,6 @@ INNER JOIN store st ON s.storeid = st.storeid
 INNER JOIN product p ON s.productid = p.productid
 INNER JOIN personnel pe ON s.personnelid = pe.personnelid
 GROUP BY st.branchname
-HAVING COUNT(pe.personnelid) >= 3
 ORDER BY total_revenue DESC;
 
 -------------------------------------------------
@@ -92,5 +91,4 @@ ORDER BY purchase_rank ASC
 LIMIT 5;
 
 -------------------------------------------------
-
 
