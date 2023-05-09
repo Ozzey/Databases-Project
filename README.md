@@ -7,14 +7,14 @@ This is the repository of MIPT2025 Databases project.
 
 
 ## Conceptual Model
-
+![image](https://user-images.githubusercontent.com/49760167/232552177-7e0d2ca6-3b92-479d-804b-5219eb089d72.png)
 
 
 ## Logical Model
+![image](https://github.com/Ozzey/Databases-Project/blob/dev/docs/ERD.png)
 
-![image](https://user-images.githubusercontent.com/49760167/232552177-7e0d2ca6-3b92-479d-804b-5219eb089d72.png)
 
-## Physical MOdel (Description)
+## Physical Model (Description)
 
 ### Table 1: bill
 | Column Name | Description | Data Type |
@@ -181,3 +181,13 @@ This is the repository of MIPT2025 Databases project.
 | --- | --- | --- |
 | BrandID | Unique identifier for each brand | int(11) |
 | BrandName | The name of the brand | varchar(20) |
+
+*******************************************************
+
+### Task 12: Analysis
+Analysis.py contains code for generating following graphs:
+1. The top 10 most expensive products
+2. Heatmap of sales by month and store location
+
+Graph:
+![image](https://github.com/Ozzey/Databases-Project/blob/dev/docs/Figure_1.png)
