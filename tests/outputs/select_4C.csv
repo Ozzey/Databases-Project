@@ -1,0 +1,6 @@
+"productid","productname","productprice","categoryid","barcode","customerid"
+1,"Product 1",1000,1,32767,1
+2,"Product 2",2000,2,32766,2
+3,"Product 3",3000,3,32765,3
+4,"Product 4",4000,4,32764,4
+5,"Product 5",5000,5,32763,5
