@@ -1,5 +1,7 @@
 import psycopg2
 import pandas as pd
+from pandas.testing import assert_frame_equal
+
 
 # Establish a connection to the database
 conn = psycopg2.connect(f"""
@@ -11,18 +13,11 @@ conn = psycopg2.connect(f"""
         """)
 
 
-def assert_dataframes_equal(dataframeA, dataframeB):
-    comparison = dataframeA.compare(dataframeB)
-    assert comparison.empty,\
-        f"Dataframes are not equal: " \
-        f"{comparison.to_string()}"
-
-
-# Create a function for query A
+# Create a function,check_dtype=False for query A
 def query_a():
     cur = conn.cursor()
     cur.execute("""
-    SELECT st.branchname, round(AVG(p.productprice),1) AS avg_price
+    SELECT st.branchname, AVG(p.productprice) AS avg_price
     FROM sales s
     INNER JOIN store st ON s.storeid = st.storeid
     INNER JOIN product p ON s.productid = p.productid
@@ -97,12 +92,14 @@ def query_c2():
     """)
     rows = cur.fetchall()
     cur.close()
-    return pd.DataFrame(rows, columns=["branchname", "total_revenue", "running_total_revenue"])
+    result = pd.DataFrame(rows, columns=["branchname", "total_revenue", "running_total_revenue"])
+    result['running_total_revenue'] = result['running_total_revenue'].astype('int64')
+    return result
 
 
 # Test query C2
 result_c2 = query_c2()
-expected_c2 = pd.read_csv('outputs/select_3B.csv', encoding='utf-8')
+expected_c2 = pd.read_csv('outputs/select_3B.csv')
 
 
 def query_c3():
@@ -125,7 +122,7 @@ def query_c3():
 
 # test query c3
 result_c3 = query_c3()
-expected_c3 = pd.read_csv('outputs/select_3C.csv', encoding='utf-8')
+expected_c3 = pd.read_csv('outputs/select_3C.csv')
 
 
 def query_d1():
@@ -211,12 +208,12 @@ conn.close()
 
 
 def test():
-    assert_dataframes_equal(result_a, expected_a)
-    assert_dataframes_equal(result_b, expected_b)
-    assert_dataframes_equal(result_c1, expected_c1)
-    assert_dataframes_equal(result_c2, expected_c2)
-    assert_dataframes_equal(result_c3, expected_c3)
-    assert_dataframes_equal(result_d1, expected_d1)
-    assert_dataframes_equal(result_d2, expected_d2)
-    assert_dataframes_equal(result_d3, expected_d3)
-    assert_dataframes_equal(result_d4, expected_d4)
+    assert_frame_equal(result_a, expected_a, check_dtype=False)
+    assert_frame_equal(result_b, expected_b, check_dtype=False)
+    assert_frame_equal(result_c1, expected_c1,check_dtype=False)
+    assert_frame_equal(result_c2, expected_c2,check_dtype=False)
+    assert_frame_equal(result_c3, expected_c3,check_dtype=False)
+    assert_frame_equal(result_d1, expected_d1,check_dtype=False)
+    assert_frame_equal(result_d2, expected_d2,check_dtype=False)
+    assert_frame_equal(result_d3, expected_d3,check_dtype=False)
+    assert_frame_equal(result_d4, expected_d4,check_dtype=False)

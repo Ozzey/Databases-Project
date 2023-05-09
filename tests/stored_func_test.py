@@ -85,15 +85,3 @@ def test_get_store_total_revenue_3():
     conn.close()
 
 
-# def test():
-#     test_get_personnel_sales_revenue_1()
-#     test_get_store_total_revenue_2()
-#     test_get_store_total_revenue_3()
-#
-#     test_get_store_total_revenue_1()
-#     test_get_store_total_revenue_2()
-#     test_get_store_total_revenue_3()
-#
-#
-# test()
-
