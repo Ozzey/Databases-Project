@@ -96,3 +96,108 @@ HAVING SUM(pr.productprice) = (
     WHERE s3.branchname = st.branchname
 )
 ORDER BY st.branchname;
+
+
+
+--------------------------------
+-- DELETE QUERIES
+
+--1. Delete all sales records for a specific store with a total sales price less than $2000:
+DELETE FROM sales
+WHERE StoreID = 1 AND ProductID IN (
+  SELECT ProductID
+  FROM product
+  WHERE ProductPrice * SalesNumber < 2000
+);
+
+--2. Delete all exchange records for a specific customer with a product name containing the word "defective":
+DELETE FROM exchange
+WHERE CustomerID = 1 AND ProductID IN (
+  SELECT ProductID
+  FROM product
+  WHERE ProductName LIKE '%defective%'
+);
+
+
+--------------------------------
+-- UPDATE QUERIES:
+
+--1. Undo the delete of all sales records for a specific store with a total sales price less than $2000:
+UPDATE sales
+SET SalesNumber = SalesNumber + (
+  SELECT SUM(SalesNumber)
+  FROM sales AS s
+  JOIN product AS p ON s.ProductID = p.ProductID
+  WHERE s.StoreID = 1 AND p.ProductPrice * s.SalesNumber < 2000
+)
+WHERE StoreID = 1 AND ProductID IN (
+  SELECT ProductID
+  FROM product
+  WHERE ProductPrice * SalesNumber < 2000
+);
+
+
+
+--2.Update the SalesNumber values for all sales records at a specific store to account for a change in pricing:
+UPDATE sales
+SET SalesNumber = SalesNumber * (old_price.ProductPrice / new_price.ProductPrice)
+FROM (
+  SELECT ProductID, ProductPrice
+  FROM product
+  WHERE ProductID = 1
+) AS old_price
+CROSS JOIN (
+  SELECT ProductID, ProductPrice
+  FROM product
+  WHERE ProductID = 1
+) AS new_price
+WHERE sales.ProductID = new_price.ProductID AND sales.StoreID = 1;
+
+--To undo this action,
+--we can update the SalesNumber values to their previous values
+--using a similar query with the appropriate prices.
+UPDATE sales
+SET SalesNumber = SalesNumber / (old_price.ProductPrice / new_price.ProductPrice)
+FROM (
+  SELECT ProductID, ProductPrice
+  FROM product
+  WHERE ProductID = 1
+) AS old_price
+CROSS JOIN (
+  SELECT ProductID, ProductPrice
+  FROM product
+  WHERE ProductID = 1
+) AS new_price
+WHERE sales.ProductID = new_price.ProductID AND sales.StoreID = 1;
+
+
+
+--3. Update the Salary values for all personnel in a specific department based on their tenure:
+UPDATE personnel
+SET Salary = Salary * (1 + tenure_bonus.BonusPercentage)
+FROM (
+  SELECT PersonnelID, DATE_PART('year', NOW() - EntryDate) AS Tenure, CASE
+    WHEN DATE_PART('year', NOW() - EntryDate) > 5 THEN 0.05
+    WHEN DATE_PART('year', NOW() - EntryDate) > 3 THEN 0.03
+    ELSE 0
+  END AS BonusPercentage
+  FROM personnel
+  WHERE DepartmentID = 1
+) AS tenure_bonus
+WHERE personnel.PersonnelID = tenure_bonus.PersonnelID;
+
+--To undo this action,
+--we can update the Salary values to their previous values
+--by dividing them by the appropriate multiplier.
+UPDATE personnel
+SET Salary = Salary / (1 + tenure_bonus.BonusPercentage)
+FROM (
+  SELECT PersonnelID, DATE_PART('year', NOW() - EntryDate) AS Tenure, CASE
+    WHEN DATE_PART('year', NOW() - EntryDate) > 5 THEN 0.05
+    WHEN DATE_PART('year', NOW() - EntryDate) > 3 THEN 0.03
+    ELSE 0
+  END AS BonusPercentage
+  FROM personnel
+  WHERE DepartmentID = 1
+) AS tenure_bonus
+WHERE personnel.PersonnelID = tenure_bonus.PersonnelID;

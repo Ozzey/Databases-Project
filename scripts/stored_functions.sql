@@ -1,6 +1,5 @@
 
 -- 1. A stored function that retrieves the total sales revenue for a given personnel within a specific date range.
-
 CREATE OR REPLACE FUNCTION get_personnel_sales_revenue(
     IN personnel_id INTEGER,
     IN start_date DATE,
