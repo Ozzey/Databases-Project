@@ -36,7 +36,7 @@ JOIN product p ON s.productid = p.productid
 JOIN categoryname c ON p.categoryid = c.categorynameid
 GROUP BY c.categoryname;
 
-select * from sales_by_category
+select * from sales_by_category;
 
 --Submission 4: Total Sales by Store and Day
 CREATE VIEW sales_by_store_day AS
@@ -49,7 +49,7 @@ JOIN store st ON s.storeid = st.storeid
 GROUP BY s.storeid, DATE_TRUNC('day', s.salesdate);
 
 
-select * from sales_by_store_day
+select * from sales_by_store_day;
 
 
 --Submission 5: Purchase History
@@ -65,7 +65,7 @@ JOIN customer c ON s.customerid = c.customerid
 JOIN product p ON s.productid = p.productid;
 
 
-select * from purchase_history
+select * from purchase_history;
 
 --Submission 6: View that shows the product details
 CREATE VIEW product_details AS
