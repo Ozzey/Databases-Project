@@ -28,7 +28,7 @@ ORDER BY total_revenue DESC;
 SELECT d.departmentname, AVG(p.salary) AS avg_salary
 FROM personnel p
 INNER JOIN department d ON p.departmentid = d.departmentid
-GROUP BY d.departmentname
+GROUP BY d.departmentname;
 
 --5. Find the total number of exchanges for each customer, ordered by the number of exchanges in descending order:
 
