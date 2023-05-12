@@ -183,11 +183,42 @@ This is the repository of MIPT2025 Databases project.
 | BrandName | The name of the brand | varchar(20) |
 
 *******************************************************
+### Tasks
 
-### Task 12: Analysis
-Analysis.py contains code for generating following graphs:
+#### Task 3: 
+  - [Creating Database Schema](https://github.com/Ozzey/Databases-Project/blob/main/scripts/database.sql) 
+  - [Creating Tables](https://github.com/Ozzey/Databases-Project/blob/main/scripts/create_ddl.sql)
+  - [Modifying the tables for FK and other purposes](https://github.com/Ozzey/Databases-Project/blob/main/scripts/alter_ddl.sql)
+
+#### Task  8: [Creating indices for the tables](https://github.com/Ozzey/Databases-Project/blob/main/scripts/index_ddl.sql)
+
+#### Task 4: [Inserting data into tables](https://github.com/Ozzey/Databases-Project/blob/main/scripts/insert_ddl.sql)
+
+####  Task 5: [CRUD Requests](https://github.com/Ozzey/Databases-Project/blob/main/scripts/CRUD.sql)
+
+#### Task 6: [SELECT queries](https://github.com/Ozzey/Databases-Project/blob/main/scripts/select_queries.sql)
+
+#### Task 7: [Tests for Select Queries](https://github.com/Ozzey/Databases-Project/blob/main/tests/select_test.py)
+
+#### Task 9: Creating 6 views submissions
+  - [Views Scripts](https://github.com/Ozzey/Databases-Project/blob/main/scripts/views.sql)
+  - [Tests for Views Scripts](https://github.com/Ozzey/Databases-Project/blob/main/tests/views_test.py)
+
+#### Task 10: Creating stored functions
+  - [Function scripts](https://github.com/Ozzey/Databases-Project/blob/main/scripts/stored_functions.sql)
+  - [Tests for the functions](https://github.com/Ozzey/Databases-Project/blob/main/tests/stored_func_test.py)
+
+#### Task 11: [Triggers](https://github.com/Ozzey/Databases-Project/blob/main/scripts/triggers.sql)
+  - Trigger 1: Trigger to update a column based on changes to another column:
+  - Trigger 2: Trigger to enforce a business rule:
+
+#### Task 12: [Analysis](https://github.com/Ozzey/Databases-Project/tree/main/analysis)
+[Analysis.py](https://github.com/Ozzey/Databases-Project/blob/main/analysis/analysis.py) contains code for generating following graphs:
 1. The top 10 most expensive products
 2. Heatmap of sales by month and store location
+
+*<b>Note</b>: [fill_tables.py](https://github.com/Ozzey/Databases-Project/blob/main/analysis/fill_tables.py) contains code for filling table "product" with 1000 random values. Run this file before running the script for creating graph.  
+But run it after testing all the scripts or it can mess with hard-coded expected results for the tests*
 
 Graph:
 ![image](https://github.com/Ozzey/Databases-Project/blob/dev/docs/Figure_1.png)
