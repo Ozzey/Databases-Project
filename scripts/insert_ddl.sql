@@ -219,3 +219,10 @@ VALUES
     (8, '2023-05-08', 8, 8, 8, 8),
     (9, '2023-05-09', 9, 9, 9, 9),
     (10, '2023-05-10', 10, 10, 10, 10);
+
+
+-- Adding random values
+UPDATE customer SET card_no = LPAD(FLOOR(RANDOM() * 10000)::TEXT, 4, '0') ||
+                             LPAD(FLOOR(RANDOM() * 10000)::TEXT, 4, '0') ||
+                             LPAD(FLOOR(RANDOM() * 10000)::TEXT, 4, '0') ||
+                             LPAD(FLOOR(RANDOM() * 10000)::TEXT, 4, '0');
