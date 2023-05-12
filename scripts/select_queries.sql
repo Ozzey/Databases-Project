@@ -34,7 +34,7 @@ FROM category c
 INNER JOIN categoryname cn ON c.categorynameid = cn.categorynameid
 INNER JOIN product p ON c.categoryid = p.categoryid
 INNER JOIN color cl ON c.colorid = cl.colorid
-GROUP BY cn.categoryname, cl.colorcode
+GROUP BY cn.categoryname, cl.colorcode;
 
 
 --2. ORDER BY: Find the total sales revenue for each store, along with the running total of revenue across all stores:
@@ -91,4 +91,3 @@ ORDER BY purchase_rank ASC
 LIMIT 5;
 
 -------------------------------------------------
-
