@@ -183,6 +183,13 @@ This is the repository of MIPT2025 Databases project.
 | BrandName | The name of the brand | varchar(20) |
 
 *******************************************************
+### Credentials:
+  - Database name: 'postgres'
+  - Username: 'postgres'
+  - Host: 'localhost'
+  - Password: 'admin'
+  - Schema: 'public'
+
 ### Tasks
 
 #### Task 3: 
